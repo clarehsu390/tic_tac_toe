@@ -7,7 +7,9 @@ ul {
   width: 300px;
 }
 li {
-  float: left;
+  float:left;
+  text-align: center;
+  font-size: 40px;
   width: 90px;
   height: 90px;
   border: solid 5px black;

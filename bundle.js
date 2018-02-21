@@ -60,37 +60,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-const Board = __webpack_require__(1);
-
-let newBoard = new Board();
-document.addEventListener('DOMContentLoaded', newBoard.grid());
-
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports) {
 
 
 class Board {
     constructor() {
         this.grid = this.makeGrid.bind(this);
-        this.click = this.handleClick.bind(this);
-        this.currentPlayer = 'X'
     }
     
-    handleClick(e) {
-      if (!e.target.innerHTML) {
-        e.target.innerHTML = this.currentPlayer;
-      }
-      return this.currentPlayer === 'X' ? this.currentPlayer = 'O' : this.currentPlayer = 'X';
-    }
+  
     
     
 
@@ -100,7 +83,6 @@ class Board {
          for (let j=0; j < 3; j++) {
              let li = document.createElement('li');
              li.dataset.pos = [i, j];
-              ul.addEventListener('click', this.click);
              ul.appendChild(li);
          }
     }
@@ -114,6 +96,92 @@ class Board {
 
 module.exports = Board;
 
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const Board = __webpack_require__(0);
+const Game = __webpack_require__(2);
+let newBoard = new Board();
+let newGame = new Game();
+
+document.addEventListener('DOMContentLoaded', newGame.run());
+
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const Board = __webpack_require__(0);
+
+class Game {
+  constructor() {
+    this.click = this.handleClick.bind(this);
+    this.currentPlayer = 'X';
+  }
+
+  handleClick(e) {
+    if (!e.target.innerHTML) {
+      e.target.innerHTML = this.currentPlayer;
+    }
+    this.winnerHelper(e);
+    return this.currentPlayer === 'X' ? this.currentPlayer = 'O' : this.currentPlayer = 'X';
+  }
+  
+  winner() {
+    const positions = [
+      // horizontals
+      [[0, 0], [0, 1], [0, 2]],
+      [[1, 0], [1, 1], [1, 2]],
+      [[2, 0], [2, 1], [2, 2]],
+      // verticals
+      [[0, 0], [1, 0], [2, 0]],
+      [[0, 1], [1, 1], [2, 1]],
+      [[0, 2], [1, 2], [2, 2]],
+      // diagonals
+      [[0, 0], [1, 1], [2, 2]],
+      [[2, 0], [1, 1], [0, 2]]
+    ];
+    positions.forEach(pos => {
+      const winner = this.winnerHelper(pos);
+      if (winner != null) {
+        return winner;
+      }
+    });
+  }
+
+  winnerHelper(e, pos) {
+    let targetMark = e.target.innerHTML;
+    let current = e.target.dataset.pos.split(',');
+    current = current.map(el => parseInt(el));
+    const list = document.getElementsByTagName('li');
+    let listItems = Array.from(list);
+   
+    pos.forEach(position => {
+      let winner = true;
+
+      listItems.forEach(el => {
+        if (el.innerHTML !== targetMark) {
+          winner = false;
+        }
+      })
+    })
+    
+    console.log(current);
+    console.log(targetMark);
+
+
+  }
+  run() {
+    document.addEventListener('click', this.click);
+    const board = new Board();
+    board.grid();
+  }
+}
+
+module.exports = Game;
 
 /***/ })
 /******/ ]);

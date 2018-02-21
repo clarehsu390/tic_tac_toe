@@ -1,4 +1,7 @@
 const Board = require('./board');
-
+const Game = require('./game');
 let newBoard = new Board();
-document.addEventListener('DOMContentLoaded', newBoard.grid());
+let newGame = new Game();
+
+document.addEventListener('DOMContentLoaded', newGame.run());
+
