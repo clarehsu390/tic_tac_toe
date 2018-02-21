@@ -1,6 +1,20 @@
-#greeting {
-  background-color: #F8F8F8;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 24px;
-  margin: 15px;
+#board {
+  display: flex;
+  justify-content: center;
+}
+ul {
+  list-style: none;
+  width: 300px;
+}
+li {
+  float: left;
+  width: 90px;
+  height: 90px;
+  border: solid 5px black;
+  background: gray;
+  cursor: pointer;
+}
+
+li:hover {
+  background: pink;
 }

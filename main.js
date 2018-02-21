@@ -1,7 +1,4 @@
-import Board from 'board';
-var element = document.querySelector("#greeting");
-element.innerText = "Hello, world!";
+const Board = require('./board');
 
-
-
-document.addEventListener('DOMContentLoaded', Board.makeGrid)
+let newBoard = new Board();
+document.addEventListener('DOMContentLoaded', newBoard.grid);

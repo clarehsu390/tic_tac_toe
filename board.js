@@ -6,10 +6,11 @@ class Board {
 
     makeGrid() {
         const ul = document.createElement('ul');
+        console.log(ul);
         for (let i=0; i < 3; i++) {
          for (let j=0; j < 3; j++) {
              let li = document.createElement('li');
-             li.data("pos", [i, j]);
+             li.dataset.pos = [i, j];
              ul.appendChild(li);
          }
     }
