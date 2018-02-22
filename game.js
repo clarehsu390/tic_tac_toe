@@ -33,7 +33,11 @@ class Game {
       const winner = this.winnerHelper(pos);
       // console .log(winner);
       if (winner) {
-        console.log('winner');
+        document.removeEventListener('click', this.click);
+        let body = document.body;
+        let div = document.createElement('div');
+        body.appendChild(div);
+        div.innerHTML = `${winner} won!!`;
       }
     });
   }

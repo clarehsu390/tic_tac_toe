@@ -2,10 +2,26 @@
 class Board {
     constructor() {
         this.grid = this.makeGrid.bind(this);
+        this.resetButton = this.resetButton.bind(this);
     }
     
   
-    
+    resetBoard() {
+        const listItems = document.getElementsByTagName('li');
+        const listArray = Array.from(listItems);
+        console.log(listArray);
+        for(let i=0; i++; i < listArray.length) {
+            console.log('in loop');
+            listItems[i].innerHTML = '';
+        }
+    }
+
+    resetButton() {
+        let button = document.createElement('button');
+        document.body.appendChild(button);
+        button.addEventListener('click', this.resetBoard);
+        button.innerHTML = 'Reset board';
+    }
     
 
     makeGrid() {
@@ -18,10 +34,7 @@ class Board {
          }
     }
     document.getElementById('board').append(ul);
-  
-    
-  
-     
+    this.resetButton();
 }
 }
 
