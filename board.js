@@ -9,10 +9,9 @@ class Board {
     resetBoard() {
         const listItems = document.getElementsByTagName('li');
         const listArray = Array.from(listItems);
-        console.log(listArray);
-        for(let i=0; i++; i < listArray.length) {
-            console.log('in loop');
-            listItems[i].innerHTML = '';
+        console.log('reset board');
+        for(let i=0; i < listArray.length; i++) {
+            listArray[i].innerHTML = '';
         }
     }
 
@@ -34,7 +33,6 @@ class Board {
          }
     }
     document.getElementById('board').append(ul);
-    this.resetButton();
 }
 }
 
