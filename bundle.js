@@ -106,7 +106,7 @@ const Game = __webpack_require__(2);
 let newBoard = new Board();
 let newGame = new Game();
 
-document.addEventListener('DOMContentLoaded', () =>newGame.run());
+document.addEventListener('DOMContentLoaded', () => newGame.run());
 
 
 
@@ -127,11 +127,11 @@ class Game {
     if (!e.target.innerHTML) {
       e.target.innerHTML = this.currentPlayer;
     }
-    this.winner(e.target.innerHTML);
+    this.winner();
     return this.currentPlayer === 'X' ? this.currentPlayer = 'O' : this.currentPlayer = 'X';
   }
   
-  winner(targetMark) {
+  winner() {
     const positions = [
       // horizontals
       [[0, 0], [0, 1], [0, 2]],
@@ -146,38 +146,36 @@ class Game {
       [[2, 0], [1, 1], [0, 2]]
     ];
     positions.forEach(pos => {
-      const winner = this.winnerHelper(targetMark, pos);
-      console.log(winner);
+      const winner = this.winnerHelper(pos);
       if (winner) {
-        alert(winner);
+        // console.log(winner);
       }
     });
   }
 
-  winnerHelper(targetMark, pos) {
-    // let current = e.target.dataset.pos.split(',');
-    // current = current.map(el => parseInt(el));
-    const list = document.getElementsByTagName('li');
-    let listItems = Array.from(list).filter(el => {
-      return (el.innerHTML === targetMark);
-    });
-    pos.forEach(position => {
+  winnerHelper(pos) {
+   let marks = ['X', 'O'];
+    // const list = document.getElementsByTagName('li');
+    // let listItems = Array.from(list).filter(el => {
+    //   return (el.innerHTML === targetMark);
+    // });
+    marks.forEach(target => {
       let winner = true;
-      listItems.forEach(el => {
-        let position1 = el.dataset.pos.split(",")
-        position1 = position1.map(el => parseInt(el));
-        if (JSON.stringify(position1) !== JSON.stringify(position)) {
-          // console.log('in loop');
-          winner = false;
+      pos.forEach(position => {
+          const mark = document.querySelector(`[data-pos='${position}']`);
+          console.log(mark.innerHTML)
+          if (mark.innerHTML !== target) {
+            // console.log('in loop');
+            winner = false;
+          }
+        });
+        console.log(winner);
+        if (winner) {
+          console.log(target);
+          return target;
+          // console.log('winner');
         }
       });
-      // console.log(winner);
-      if (winner) {
-        console.log(targetMark)
-        return targetMark;
-        // console.log('winner');
-      }
-    });
     // return null;
     
     // console.log(current);
@@ -189,6 +187,7 @@ class Game {
     document.addEventListener('click', this.click);
     const board = new Board();
     board.grid();
+    // this.winner();
   }
 }
 
