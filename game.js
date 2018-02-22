@@ -31,8 +31,9 @@ class Game {
     ];
     positions.forEach(pos => {
       const winner = this.winnerHelper(pos);
+      // console .log(winner);
       if (winner) {
-        // console.log(winner);
+        console.log('winner');
       }
     });
   }
@@ -43,24 +44,26 @@ class Game {
     // let listItems = Array.from(list).filter(el => {
     //   return (el.innerHTML === targetMark);
     // });
-    marks.forEach(target => {
+    for (let i=0; i < marks.length; i++){
       let winner = true;
-      pos.forEach(position => {
+      let targetMark = marks[i];
+      for(let j=0; j < pos.length; j++) {
+        let position = pos[j];
           const mark = document.querySelector(`[data-pos='${position}']`);
-          console.log(mark.innerHTML)
-          if (mark.innerHTML !== target) {
+          // console.log(mark.innerHTML);
+          if (mark.innerHTML !== targetMark) {
             // console.log('in loop');
             winner = false;
           }
-        });
-        console.log(winner);
+        }
+        // console.log(winner);
         if (winner) {
-          console.log(target);
-          return target;
+          console.log('in loop');
+          return targetMark;
           // console.log('winner');
         }
-      });
-    // return null;
+      }
+  // console.log('hello');
     
     // console.log(current);
     // console.log(targetMark);
