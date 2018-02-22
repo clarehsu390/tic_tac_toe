@@ -79,8 +79,11 @@ class Board {
         const listItems = document.getElementsByTagName('li');
         const listArray = Array.from(listItems);
         console.log('reset board');
-        for(let i=0; i < listArray.length; i++) {
-            listArray[i].innerHTML = '';
+        // for(let i=0; i < listArray.length; i++) {
+        //     listArray[i].innerHTML = '';
+        // }
+        for(let item of listArray) {
+            item.innerHTML = '';
         }
     }
 
